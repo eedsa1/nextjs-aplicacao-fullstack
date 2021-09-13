@@ -69,25 +69,6 @@ export default async (
       appointments: [],
     });
     res.status(200).json(response.ops[0]);
-  } else if(req.method === 'GET') {
-
-    const {
-      email,
-    } = req.body;
-    if(!email) {
-      res.status(400).json({ error: 'Missing email!' });
-      return;
-    }
-    const { db } = await connect();
-
-    const response = await db.collection('users').findOne({ email });
-
-    if(!response) {
-      res.status(400).json({ error: 'User with this email not found!' });
-      return;
-    }
-
-    res.status(200).json(response);
   } else {
     res.status(400).json({ error: 'erro ao processar a requisição' });
   }
